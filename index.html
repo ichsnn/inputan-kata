@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        body > div {
+            margin: auto;
+            padding: 20px;
+        }
+
+        #text {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: 500;
+            margin-bottom: 10px;
+            transition: all .5s;
+            line-height: 2em;
+            height: 67px;
+            overflow-y: hidden;
+        }
+
+        #inputan {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: normal;
+            font-size: 14px;
+            padding: 6px;
+            width: 100%;
+        }
+
+        .text-input {
+            display: flex;
+            width: 100%;
+            margin-bottom: 100px;
+        }
+
+        .kata {
+            position: relative;
+            color: rgb(160, 160, 160);
+            padding-left: 4px;
+            padding-right: 4px;
+            margin-top: 4px;
+        }
+
+        .focus {
+            background-color: yellow;
+            /* display: inline-block; */
+            color: black;
+            font-weight: 600;
+        }
+
+        .salah {
+            background-color: tomato;
+            color: black;
+        }
+
+        .benar {
+            background-color: greenyellow;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="inputan-kata">
+        <div id="text"></div>
+        <div class="text-input">
+            <input type="text" id="inputan" placeholder="Ketik di sini...">
+        </div>
+    </div>
+    <script src="./kata.js"></script>
+    <script src="./inputanKata.js"></script>
+</body>
+
+</html>
