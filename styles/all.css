@@ -134,6 +134,15 @@ body {
     display: flex;
 }
 
+.inputan-kata-box .duration {
+    background-color: white;
+    color: #757575;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    padding: 4px;
+}
+
 .inputan-kata-box > div {
     margin: auto;
 }

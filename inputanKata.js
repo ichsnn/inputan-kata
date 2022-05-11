@@ -7,12 +7,14 @@ class InputanKataObj {
     inputan;
     resetButton;
     bound;
-    timeMinute; // minutes
+    durationHTML;
+    durationOnSecond; // Example 60s
     grossWPM = 0;
 
-    constructor(element, text, timeMinute = '1') {
+    constructor(element, text, durationOnSecond = '60') {
         this.bound = element;
-        this.timeMinute = timeMinute;
+        this.durationOnSecond = durationOnSecond;
+        this.durationHTML = this.bound.querySelector('.duration');
         this.index = 0;
         this.inputan = this.bound.querySelector('#inputan');
         this.textHTML = this.bound.querySelector('#text');
@@ -51,8 +53,7 @@ class InputanKataObj {
                 }
                 this.inputan.value = '';
                 if (this.index >= this.textArray.length) {
-                    this.inputan.disabled = 1;
-                    this.inputan.placeholder = 'Tekan Tombol "Reset" Untuk Memulai Lagi'
+                    this.disableInputan();
                 }
             }
         });
@@ -82,7 +83,7 @@ class InputanKataObj {
 
     resetOnClick() {
         this.resetButton.addEventListener('click', () => {
-            this.null
+            this.null;
             this.bound.remove();
             addInputanKata();
         });
@@ -101,16 +102,35 @@ class InputanKataObj {
         return textTemplate;
     }
 
-    countGrossWPM() {
-        
+    disableInputan() {
+        this.inputan.value = '';
+        this.inputan.disabled = 1;
+        this.inputan.placeholder = 'Tekan "Reset" untuk memulai lagi';
     }
+
+    timerCountDown() {
+        let timeout = 1000;
+        this.durationOnSecond -= 1;
+        let countDown = setInterval(() => {
+            this.durationHTML.textContent = secondToMinuteDuration(
+                this.durationOnSecond
+            );
+            if (this.durationOnSecond === 0) {
+                clearTimeout(countDown);
+                this.disableInputan();
+            }
+            if (this.durationOnSecond > 0) this.durationOnSecond--;
+        }, timeout);
+    }
+
+    countGrossWPM() {}
 
     mulai() {
         this.inputan.addEventListener(
             'keypress',
             (event) => {
                 if (event.key) {
-                    console.log('Mulai');
+                    this.timerCountDown();
                 }
             },
             { once: true }
@@ -127,13 +147,14 @@ class InputanKata extends HTMLDivElement {
             </div>
             <div class="text-input">
                 <input type="text" id="inputan" placeholder="Ketik di sini...">
+                <div class="duration">1:00</div>
                 <input type="reset" id="btn-reset" value="Reset">
             </div>
         `;
     }
 
     connectedCallback() {
-        let inputanKata = new InputanKataObj(this, text, 1);
+        let inputanKata = new InputanKataObj(this, text, 60);
         inputanKata.mulai();
     }
 }
@@ -148,6 +169,19 @@ function addInputanKata() {
     }, 1750);
 }
 
+function secondToMinuteDuration(secondDuration) {
+    let minute, secondMod;
+
+    minute = Math.floor(secondDuration / 60);
+    secondMod = secondDuration % 60;
+
+    if (secondMod < 10) {
+        secondMod = `0${secondMod}`;
+    }
+
+    return `${minute}:${secondMod}`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    addInputanKata()
-})
+    addInputanKata();
+});
