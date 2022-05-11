@@ -11,18 +11,18 @@ class InputanKataObj {
     constructor(element, text, inputFieldHTML_ID, textDisplayHTML_ID) {
         this.bound = element;
         this.index = 0;
-        this.inputan = element.querySelector('#' + inputFieldHTML_ID);
-        this.textHTML = element.querySelector('#' + textDisplayHTML_ID);
+        this.inputan = this.bound.querySelector('#' + inputFieldHTML_ID);
+        this.textHTML = this.bound.querySelector('#' + textDisplayHTML_ID);
         this.textArray = text.split(' ');
         this.textDisplayTemplate = this.textTemplate(this.textArray, 'kata');
         this.textHTML.innerHTML = this.textDisplayTemplate;
-        this.kata = element.querySelectorAll('.kata');
+        this.kata = this.bound.querySelectorAll('.kata');
         this.kata[0].classList.add('focus');
         this.inputanOnKeypress();
         this.inputanOnKeyup();
         this.windowOnResize();
 
-        this.resetButton = element.querySelector('#btn-reset');
+        this.resetButton = this.bound.querySelector('#btn-reset');
         this.resetOnClick();
     }
 
@@ -119,7 +119,7 @@ class InputanKata extends HTMLDivElement {
             </div>
             <div class="text-input">
                 <input type="text" id="inputan" placeholder="Ketik di sini...">
-                <input type="reset" id="btn-reset" value="reset">
+                <input type="reset" id="btn-reset" value="Reset">
             </div>
         `;
     }
