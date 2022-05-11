@@ -82,6 +82,10 @@ body > div {
     color: #000000B3;
 }
 
+.peringatan {
+    color: red;
+}
+
 #btn-reset {
     font-weight: 600;
     padding: 6px;

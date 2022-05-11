@@ -16,18 +16,20 @@ class InputaKata {
         this.textHTML.innerHTML = this.textDisplayTemplate;
         this.kata = document.getElementsByClassName('kata');
         this.kata[0].classList.add('focus');
-        this.inputListenerOnKeypress();
+        this.inputanOnKeypress();
+        this.inputanOnKeyup();
         this.windowOnResize();
 
-        this.resetButton = document.getElementById('btn-reset')
-        this.resetOnClick()
+        this.resetButton = document.getElementById('btn-reset');
+        this.resetOnClick();
     }
 
-    inputListenerOnKeypress() {
+    inputanOnKeypress() {
         this.inputan.addEventListener('keypress', (event) => {
             if (event.keyCode === 32 || event.key === 'Enter') {
                 event.preventDefault();
                 this.kata[this.index].classList.remove('focus');
+                this.kata[this.index].classList.remove('peringatan');
                 if (this.inputan.value === this.textArray[this.index]) {
                     this.kata[this.index].classList.add('benar');
                 } else {
@@ -36,7 +38,7 @@ class InputaKata {
                 this.index++;
                 if (this.kata[this.index]) {
                     this.kata[this.index].classList.add('focus');
-                    this.fokusKeKata()
+                    this.fokusKeKata();
                 }
                 this.inputan.value = '';
                 if (this.index >= this.textArray.length) {
@@ -46,14 +48,33 @@ class InputaKata {
         });
     }
 
+    inputanOnKeyup() {
+        this.inputan.addEventListener('keyup', (event) => {
+            if (this.inputan.value !== '') {
+                if (
+                    this.textArray[this.index].indexOf(this.inputan.value) === 0
+                ) {
+                    this.kata[this.index].classList.remove('peringatan');
+                } else {
+                    console.log('Salah');
+                    this.kata[this.index].classList.add('peringatan');
+                }
+            } else {
+                this.kata[this.index].classList.remove('peringatan');
+            }
+        });
+    }
+
     windowOnResize() {
-        window.addEventListener('resize', this.fokusKeKata())
+        window.addEventListener('resize', () => {
+            this.fokusKeKata();
+        });
     }
 
     resetOnClick() {
         this.resetButton.addEventListener('click', () => {
-            document.location.reload()
-        })
+            document.location.reload();
+        });
     }
 
     fokusKeKata() {
@@ -70,13 +91,17 @@ class InputaKata {
     }
 
     mulai() {
-        this.inputan.addEventListener('keypress', (event) => {
-            if(event.key) {
-                console.log('Mulai')
-            }
-        }, {once: true})
+        this.inputan.addEventListener(
+            'keypress',
+            (event) => {
+                if (event.key) {
+                    console.log('Mulai');
+                }
+            },
+            { once: true }
+        );
     }
 }
 
-let inputanKata = new InputaKata(text, 'inputan', 'text')
-inputanKata.mulai()
+let inputanKata = new InputaKata(text, 'inputan', 'text');
+inputanKata.mulai();
