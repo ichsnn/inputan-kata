@@ -54,12 +54,12 @@ body {
 
 #inputan {
     font-weight: normal;
-    font-size: 14px;
+    font-size: 16px;
     padding: 6px;
     width: 100%;
     font-weight: 600;
     outline: none;
-    border-radius: 0;
+    border-radius: 4px 0px 0px 4px;
     border: none;
 }
 
@@ -73,6 +73,7 @@ body {
     width: 100%;
     justify-content: center;
     box-shadow: 4px 4px 0px #000;
+    border-radius: 4px;
 }
 
 .kata {
@@ -108,10 +109,21 @@ body {
 
 #btn-reset {
     font-weight: 700;
+    font-size: 16px;
+    background-color: #ffffff;
     padding: 6px;
     border-radius: 0;
+    border-radius: 0px 4px 4px 0px;
     outline: none;
     border: none;
+}
+
+#btn-reset:hover {
+    text-decoration: underline;
+}
+
+#btn-reset:active {
+    color: rgba(0, 0, 0, 0.756);
 }
 
 #btn-reset:hover {
@@ -139,6 +151,7 @@ body {
     width: 16px;
     background: #fff;
     animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+    border-radius: 4px;
     box-shadow: 4px 4px 0px #000;
   }
   .lds-facebook div:nth-child(1) {
