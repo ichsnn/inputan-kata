@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: darkslateblue;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+}
+
+body > div {
+    margin: auto;
+    padding: 20px;
+}
+
+#text {
+    font-family: 'Fira Code', monospace;
+    font-weight: 500;
+    margin-bottom: 10px;
+    transition: all .5s;
+    line-height: 2em;
+    height: 67px;
+    overflow-y: hidden;
+    color: white;
+}
+
+#inputan {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 6px;
+    width: 100%;
+}
+
+.text-input {
+    display: flex;
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.kata {
+    position: relative;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-top: 4px;
+}
+
+.focus {
+    background-color: yellow;
+    display: inline-block;
+    font-size: 24px;
+    color: black;
+    font-weight: 700;
+}
+
+.salah {
+    background-color: tomato;
+    font-weight: 600;
+    color: #000000B3;
+}
+
+.benar {
+    background-color: greenyellow;
+    font-weight: 600;
+    color: #000000B3;
+}
