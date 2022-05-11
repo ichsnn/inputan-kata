@@ -7,12 +7,15 @@ class InputanKataObj {
     inputan;
     resetButton;
     bound;
+    timeMinute; // minutes
+    grossWPM = 0;
 
-    constructor(element, text, inputFieldHTML_ID, textDisplayHTML_ID) {
+    constructor(element, text, timeMinute = '1') {
         this.bound = element;
+        this.timeMinute = timeMinute;
         this.index = 0;
-        this.inputan = this.bound.querySelector('#' + inputFieldHTML_ID);
-        this.textHTML = this.bound.querySelector('#' + textDisplayHTML_ID);
+        this.inputan = this.bound.querySelector('#inputan');
+        this.textHTML = this.bound.querySelector('#text');
         this.textArray = text.split(' ');
         this.textDisplayTemplate = this.textTemplate(this.textArray, 'kata');
         this.textHTML.innerHTML = this.textDisplayTemplate;
@@ -98,6 +101,10 @@ class InputanKataObj {
         return textTemplate;
     }
 
+    countGrossWPM() {
+        
+    }
+
     mulai() {
         this.inputan.addEventListener(
             'keypress',
@@ -126,15 +133,11 @@ class InputanKata extends HTMLDivElement {
     }
 
     connectedCallback() {
-        let inputanKata = new InputanKataObj(this, text, 'inputan', 'text');
+        let inputanKata = new InputanKataObj(this, text, 1);
         inputanKata.mulai();
     }
 }
 customElements.define('inputan-kata', InputanKata, { extends: 'div' });
-
-function sleep(delay) {
-    return new Promise((resolve) => setTimeout(resolve, delay));
-}
 
 function addInputanKata() {
     document.querySelector('.inputan-kata-box').innerHTML =
