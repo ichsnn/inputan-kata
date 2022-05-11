@@ -6,6 +6,10 @@
     font-family: 'Fira Code', monospace;
 }
 
+a {
+    text-decoration: none;
+}
+
 html {
     background-color: darkslateblue;
 }
@@ -22,14 +26,22 @@ body > div {
 .title {
     margin-bottom: 36px;
     text-align: center;
-    color: rgb(255, 214, 101);
+    color: #ffd665;
+    text-shadow: 4px 4px 0px #000;
+    transition: all .25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.title:hover {
+    text-shadow: 4px 4px 0px #000, 7px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
 .text-box {
     background-color: rgb(43, 37, 79);
     padding: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
     border-radius: 6px;
+    box-shadow: 4px 4px 0px #000;
+    transition: all .25s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 #text {
@@ -52,6 +64,7 @@ body > div {
     display: flex;
     width: 100%;
     justify-content: center;
+    box-shadow: 4px 4px 0px #000;
 }
 
 .kata {
