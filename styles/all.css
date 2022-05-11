@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Fira Code', monospace;
 }
 
 html {
@@ -10,17 +11,21 @@ html {
 }
 
 body {
-    display: flex;
-    min-height: 100vh;
-}
-
-body > div {
-    margin: auto;
     padding: 20px;
 }
 
+body > div {
+    max-width: 1440px;
+    margin: auto;
+}
+
+.title {
+    margin-bottom: 36px;
+    text-align: center;
+    color: burlywood;
+}
+
 #text {
-    font-family: 'Fira Code', monospace;
     font-weight: 500;
     margin-bottom: 10px;
     transition: all .5s;
@@ -31,11 +36,11 @@ body > div {
 }
 
 #inputan {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: normal;
     font-size: 14px;
     padding: 6px;
     width: 100%;
+    font-weight: 600;
 }
 
 .text-input {
