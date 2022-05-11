@@ -49,6 +49,7 @@ class InputanKataObj {
                 this.inputan.value = '';
                 if (this.index >= this.textArray.length) {
                     this.inputan.disabled = 1;
+                    this.inputan.placeholder = 'Tekan Tombol "Reset" Untuk Memulai Lagi'
                 }
             }
         });

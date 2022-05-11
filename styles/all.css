@@ -58,6 +58,14 @@ body {
     padding: 6px;
     width: 100%;
     font-weight: 600;
+    outline: none;
+    border-radius: 0;
+    border: none;
+}
+
+#inputan:disabled {
+    background-color: white;
+    cursor: not-allowed;
 }
 
 .text-input {
@@ -101,6 +109,9 @@ body {
 #btn-reset {
     font-weight: 700;
     padding: 6px;
+    border-radius: 0;
+    outline: none;
+    border: none;
 }
 
 #btn-reset:hover {
