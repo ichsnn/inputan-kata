@@ -26,7 +26,7 @@ class InputaKata {
 
     inputanOnKeypress() {
         this.inputan.addEventListener('keypress', (event) => {
-            if (event.key === ' ' || event.key === 'Enter') {
+            if (event.key === ' ' || event.key === 'Enter' || event.code === 'Space') {
                 event.preventDefault();
                 this.kata[this.index].classList.remove('focus');
                 this.kata[this.index].classList.remove('peringatan');
