@@ -99,8 +99,12 @@ body {
 }
 
 #btn-reset {
-    font-weight: 600;
+    font-weight: 700;
     padding: 6px;
+}
+
+#btn-reset:hover {
+    cursor: pointer;
 }
 
 .inputan-kata-box {
