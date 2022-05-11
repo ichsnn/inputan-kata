@@ -1,4 +1,4 @@
-class InputaKata {
+class InputanKataObj {
     index;
     kata;
     textArray;
@@ -62,7 +62,6 @@ class InputaKata {
                 ) {
                     this.kata[this.index].classList.remove('peringatan');
                 } else {
-                    console.log('Salah');
                     this.kata[this.index].classList.add('peringatan');
                 }
             } else {
@@ -79,8 +78,9 @@ class InputaKata {
 
     resetOnClick() {
         this.resetButton.addEventListener('click', () => {
-            this.bound.remove()
-            document.querySelector('.inputan-kata-box').append(new InputanKata())
+            this.null
+            this.bound.remove();
+            addInputanKata();
         });
     }
 
@@ -119,14 +119,31 @@ class InputanKata extends HTMLDivElement {
             </div>
             <div class="text-input">
                 <input type="text" id="inputan" placeholder="Ketik di sini...">
-                <button type="reset" id="btn-reset">Reset</button>
+                <input type="reset" id="btn-reset" value="reset">
             </div>
         `;
     }
 
     connectedCallback() {
-        let inputanKata = new InputaKata(this, text, 'inputan', 'text');
+        let inputanKata = new InputanKataObj(this, text, 'inputan', 'text');
         inputanKata.mulai();
     }
 }
 customElements.define('inputan-kata', InputanKata, { extends: 'div' });
+
+function sleep(delay) {
+    return new Promise((resolve) => setTimeout(resolve, delay));
+}
+
+function addInputanKata() {
+    document.querySelector('.inputan-kata-box').innerHTML =
+        '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
+    setTimeout(() => {
+        document.querySelector('.inputan-kata-box').innerHTML = '';
+        document.querySelector('.inputan-kata-box').append(new InputanKata());
+    }, 750);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    addInputanKata()
+})
