@@ -5,6 +5,7 @@ class InputaKata {
     textHTML;
     textDisplayTemplate;
     inputan;
+    resetButton;
 
     constructor(text, inputFieldHTML_ID, textDisplayHTML_ID) {
         this.index = 0;
@@ -17,6 +18,9 @@ class InputaKata {
         this.kata[0].classList.add('focus');
         this.inputListenerOnKeypress();
         this.windowOnResize();
+
+        this.resetButton = document.getElementById('btn-reset')
+        this.resetOnClick()
     }
 
     inputListenerOnKeypress() {
@@ -44,6 +48,12 @@ class InputaKata {
 
     windowOnResize() {
         window.addEventListener('resize', this.fokusKeKata())
+    }
+
+    resetOnClick() {
+        this.resetButton.addEventListener('click', () => {
+            document.location.reload()
+        })
     }
 
     fokusKeKata() {

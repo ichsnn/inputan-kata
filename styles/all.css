@@ -15,20 +15,25 @@ body {
 }
 
 body > div {
-    max-width: 1440px;
+    max-width: 720px;
     margin: auto;
 }
 
 .title {
     margin-bottom: 36px;
     text-align: center;
-    color: burlywood;
+    color: orange;
+}
+
+.text-box {
+    background-color: rgb(43, 37, 79);
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
 }
 
 #text {
     font-weight: 500;
-    margin-bottom: 10px;
-    transition: all .5s;
     line-height: 2em;
     height: 67px;
     overflow-y: hidden;
@@ -47,6 +52,7 @@ body > div {
     display: flex;
     width: 100%;
     margin-bottom: 100px;
+    justify-content: center;
 }
 
 .kata {
@@ -74,4 +80,9 @@ body > div {
     background-color: greenyellow;
     font-weight: 600;
     color: #000000B3;
+}
+
+#btn-reset {
+    font-weight: 600;
+    padding: 6px;
 }
