@@ -6,27 +6,33 @@ class InputaKata {
     textDisplayTemplate;
     inputan;
     resetButton;
+    bound;
 
-    constructor(text, inputFieldHTML_ID, textDisplayHTML_ID) {
+    constructor(element, text, inputFieldHTML_ID, textDisplayHTML_ID) {
+        this.bound = element;
         this.index = 0;
-        this.inputan = document.getElementById(inputFieldHTML_ID);
-        this.textHTML = document.getElementById(textDisplayHTML_ID);
+        this.inputan = element.querySelector('#' + inputFieldHTML_ID);
+        this.textHTML = element.querySelector('#' + textDisplayHTML_ID);
         this.textArray = text.split(' ');
         this.textDisplayTemplate = this.textTemplate(this.textArray, 'kata');
         this.textHTML.innerHTML = this.textDisplayTemplate;
-        this.kata = document.getElementsByClassName('kata');
+        this.kata = element.querySelectorAll('.kata');
         this.kata[0].classList.add('focus');
         this.inputanOnKeypress();
         this.inputanOnKeyup();
         this.windowOnResize();
 
-        this.resetButton = document.getElementById('btn-reset');
+        this.resetButton = element.querySelector('#btn-reset');
         this.resetOnClick();
     }
 
     inputanOnKeypress() {
         this.inputan.addEventListener('keypress', (event) => {
-            if (event.key === ' ' || event.key === 'Enter' || event.code === 'Space') {
+            if (
+                event.key === ' ' ||
+                event.key === 'Enter' ||
+                event.code === 'Space'
+            ) {
                 event.preventDefault();
                 this.kata[this.index].classList.remove('focus');
                 this.kata[this.index].classList.remove('peringatan');
@@ -73,7 +79,8 @@ class InputaKata {
 
     resetOnClick() {
         this.resetButton.addEventListener('click', () => {
-            document.location.reload();
+            this.bound.remove()
+            document.querySelector('.inputan-kata-box').append(new InputanKata())
         });
     }
 
@@ -103,5 +110,23 @@ class InputaKata {
     }
 }
 
-let inputanKata = new InputaKata(text, 'inputan', 'text');
-inputanKata.mulai();
+class InputanKata extends HTMLDivElement {
+    constructor() {
+        super();
+        this.innerHTML = `
+            <div class="text-box">
+                <div id="text"></div>
+            </div>
+            <div class="text-input">
+                <input type="text" id="inputan" placeholder="Ketik di sini...">
+                <button type="reset" id="btn-reset">Reset</button>
+            </div>
+        `;
+    }
+
+    connectedCallback() {
+        let inputanKata = new InputaKata(this, text, 'inputan', 'text');
+        inputanKata.mulai();
+    }
+}
+customElements.define('inputan-kata', InputanKata, { extends: 'div' });
