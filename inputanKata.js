@@ -137,11 +137,11 @@ function sleep(delay) {
 
 function addInputanKata() {
     document.querySelector('.inputan-kata-box').innerHTML =
-        '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
+        '<div class="lds-facebook"><div></div><div></div><div></div></div>';
     setTimeout(() => {
         document.querySelector('.inputan-kata-box').innerHTML = '';
         document.querySelector('.inputan-kata-box').append(new InputanKata());
-    }, 750);
+    }, 1750);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
