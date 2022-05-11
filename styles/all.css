@@ -18,7 +18,7 @@ body {
     padding: 20px;
 }
 
-body > div {
+body {
     max-width: 720px;
     margin: auto;
 }
