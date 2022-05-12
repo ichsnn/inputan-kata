@@ -89,7 +89,9 @@ class InputanKataObj {
     }
 
     fokusKeKata() {
-        this.kata[this.index].scrollIntoView();
+        let topPos = this.kata[this.index].offsetTop - this.bound.offsetTop - 16;
+        this.textHTML.scrollTop = topPos
+        // this.kata[this.index].scrollIntoView();
     }
 
     textTemplate(textArray, className = 'kata') {
