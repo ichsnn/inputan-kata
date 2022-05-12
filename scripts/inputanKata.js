@@ -26,7 +26,6 @@ class InputanKataObj {
         this.inputanOnKeypress();
         this.inputanOnKeyup();
         this.windowOnResize();
-
         this.resetButton = this.bound.querySelector('#btn-reset');
         this.resetOnClick();
     }
@@ -185,3 +184,4 @@ function secondToMinuteDuration(secondDuration) {
 document.addEventListener('DOMContentLoaded', () => {
     addInputanKata();
 });
+
