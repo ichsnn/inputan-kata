@@ -32,6 +32,7 @@ class InputanKataObj {
 
     inputanOnKeypress() {
         this.inputan.addEventListener('keypress', (event) => {
+            alert(event.key + ", " + event.code)
             if (
                 event.key === ' ' ||
                 event.key === 'Enter' ||
