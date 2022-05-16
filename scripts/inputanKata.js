@@ -109,7 +109,7 @@ class InputanKataObj {
     disableInputan() {
         this.inputan.value = '';
         this.inputan.disabled = 1;
-        this.inputan.placeholder = 'Tekan "Reset" untuk memulai lagi';
+        this.inputan.placeholder = 'Tekan "🔃" untuk memulai lagi';
     }
 
     timerCountDown() {
@@ -154,7 +154,7 @@ class InputanKata extends HTMLDivElement {
             <div class="text-input">
                 <input type="text" id="inputan" placeholder="Ketik di sini...">
                 <div class="duration">1:00</div>
-                <input type="reset" id="btn-reset" value="Reset">
+                <input type="reset" id="btn-reset" value="🔃">
             </div>
         `;
     }
