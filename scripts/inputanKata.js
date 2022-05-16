@@ -6,27 +6,27 @@ class InputanKataObj {
     textDisplayTemplate;
     inputan;
     resetButton;
-    bound;
+    parentElement;
     durationHTML;
     durationOnSecond; // Example 60s
     grossWPM = 0;
 
-    constructor(element, text, durationOnSecond = '60') {
-        this.bound = element;
+    constructor(parentElement, text, durationOnSecond = '60') {
+        this.parentElement = parentElement;
         this.durationOnSecond = durationOnSecond;
-        this.durationHTML = this.bound.querySelector('.duration');
+        this.durationHTML = this.parentElement.querySelector('.duration');
         this.index = 0;
-        this.inputan = this.bound.querySelector('#inputan');
-        this.textHTML = this.bound.querySelector('#text');
+        this.inputan = this.parentElement.querySelector('#inputan');
+        this.textHTML = this.parentElement.querySelector('#text');
         this.textArray = text.split(' ');
         this.textDisplayTemplate = this.textTemplate(this.textArray, 'kata');
         this.textHTML.innerHTML = this.textDisplayTemplate;
-        this.kata = this.bound.querySelectorAll('.kata');
+        this.kata = this.parentElement.querySelectorAll('.kata');
         this.kata[0].classList.add('focus');
         this.inputanOnKeypress();
         this.inputanOnKeyup();
         this.windowOnResize();
-        this.resetButton = this.bound.querySelector('#btn-reset');
+        this.resetButton = this.parentElement.querySelector('#btn-reset');
         this.resetOnClick();
     }
 
@@ -38,21 +38,23 @@ class InputanKataObj {
                 event.code === 'Space'
             ) {
                 event.preventDefault();
-                this.kata[this.index].classList.remove('focus');
-                this.kata[this.index].classList.remove('peringatan');
-                if (this.inputan.value === this.textArray[this.index]) {
-                    this.kata[this.index].classList.add('benar');
-                } else {
-                    this.kata[this.index].classList.add('salah');
-                }
-                this.index++;
-                if (this.kata[this.index]) {
-                    this.kata[this.index].classList.add('focus');
-                    this.fokusKeKata();
-                }
-                this.inputan.value = '';
-                if (this.index >= this.textArray.length) {
-                    this.disableInputan();
+                if (this.inputan.value !== '') {
+                    this.kata[this.index].classList.remove('focus');
+                    this.kata[this.index].classList.remove('peringatan');
+                    if (this.inputan.value === this.textArray[this.index]) {
+                        this.kata[this.index].classList.add('benar');
+                    } else {
+                        this.kata[this.index].classList.add('salah');
+                    }
+                    this.index++;
+                    if (this.kata[this.index]) {
+                        this.kata[this.index].classList.add('focus');
+                        this.fokusKeKata();
+                    }
+                    this.inputan.value = '';
+                    if (this.index >= this.textArray.length) {
+                        this.disableInputan();
+                    }
                 }
             }
         });
@@ -83,14 +85,15 @@ class InputanKataObj {
     resetOnClick() {
         this.resetButton.addEventListener('click', () => {
             this.null;
-            this.bound.remove();
+            this.parentElement.remove();
             addInputanKata();
         });
     }
 
     fokusKeKata() {
-        let topPos = this.kata[this.index].offsetTop - this.bound.offsetTop - 16;
-        this.textHTML.scrollTop = topPos
+        let topPos =
+            this.kata[this.index].offsetTop - this.parentElement.offsetTop - 16;
+        this.textHTML.scrollTop = topPos;
         // this.kata[this.index].scrollIntoView();
     }
 
@@ -124,7 +127,9 @@ class InputanKataObj {
         }, timeout);
     }
 
-    countGrossWPM() {}
+    countGrossWPM(word) {
+        console.log(word);
+    }
 
     mulai() {
         this.inputan.addEventListener(
@@ -186,4 +191,3 @@ function secondToMinuteDuration(secondDuration) {
 document.addEventListener('DOMContentLoaded', () => {
     addInputanKata();
 });
-
