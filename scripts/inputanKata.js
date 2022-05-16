@@ -10,6 +10,7 @@ class InputanKataObj {
     durationHTML;
     durationOnSecond; // Example 60s
     grossWPM = 0;
+    diffScroll = 0;
 
     constructor(parentElement, text, durationOnSecond = '60') {
         this.parentElement = parentElement;
@@ -32,14 +33,13 @@ class InputanKataObj {
 
     inputanOnKeypress() {
         this.inputan.addEventListener('keypress', (event) => {
-            alert(event.key + ", " + event.code)
             if (
                 event.key === ' ' ||
                 event.key === 'Enter' ||
                 event.code === 'Space'
             ) {
                 event.preventDefault();
-                if (this.inputan.value !== '') {
+                // if (this.inputan.value !== '') {
                     this.kata[this.index].classList.remove('focus');
                     this.kata[this.index].classList.remove('peringatan');
                     if (this.inputan.value === this.textArray[this.index]) {
@@ -56,7 +56,7 @@ class InputanKataObj {
                     if (this.index >= this.textArray.length) {
                         this.disableInputan();
                     }
-                }
+                // }
             }
         });
     }
@@ -85,7 +85,6 @@ class InputanKataObj {
 
     resetOnClick() {
         this.resetButton.addEventListener('click', () => {
-            this.null;
             this.parentElement.remove();
             addInputanKata();
         });
@@ -93,8 +92,11 @@ class InputanKataObj {
 
     fokusKeKata() {
         let topPos =
-            this.kata[this.index].offsetTop - this.parentElement.offsetTop - 16;
-        this.textHTML.scrollTop = topPos;
+            this.kata[this.index].offsetTop - this.parentElement.offsetTop;
+        if (this.diffScroll === 0) {
+            this.diffScroll = topPos;
+        }
+        this.textHTML.scrollTop = topPos - this.diffScroll;
         // this.kata[this.index].scrollIntoView();
     }
 
@@ -110,14 +112,18 @@ class InputanKataObj {
     disableInputan() {
         this.inputan.value = '';
         this.inputan.disabled = 1;
-        this.inputan.placeholder = 'Tekan "🔃" untuk memulai lagi';
+        this.inputan.placeholder = "Klik untuk mulai ulang..."
+        this.parentElement.querySelector('.text-input').addEventListener('click', () => {
+            this.parentElement.remove();
+            addInputanKata();
+        })
     }
 
     timerCountDown() {
         let timeout = 1000;
         this.durationOnSecond -= 1;
         let countDown = setInterval(() => {
-            this.durationHTML.textContent = secondToMinuteDuration(
+            this.durationHTML.querySelector('#time-counter').textContent = secondToMinuteDuration(
                 this.durationOnSecond
             );
             if (this.durationOnSecond === 0) {
@@ -149,13 +155,16 @@ class InputanKata extends HTMLDivElement {
     constructor() {
         super();
         this.innerHTML = `
+            <div class="duration">Time Left :&nbsp;<div id="time-counter">1:00</div></div>
             <div class="text-box">
                 <div id="text"></div>
             </div>
+
             <div class="text-input">
                 <input type="text" id="inputan" placeholder="Ketik di sini...">
-                <div class="duration">1:00</div>
-                <input type="reset" id="btn-reset" value="🔃">
+                <button type="reset" id="btn-reset"><span class="material-symbols-outlined">
+                refresh
+                </span></button>
             </div>
         `;
     }
