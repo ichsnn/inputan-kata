@@ -33,6 +33,7 @@ class InputanKataObj {
 
     inputanOnKeypress() {
         this.inputan.addEventListener('keypress', (event) => {
+            document.querySelector('.debug').textContent = event.key + ", " + event.code
             if (
                 event.key === ' ' ||
                 event.key === 'Enter' ||
