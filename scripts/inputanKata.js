@@ -33,14 +33,13 @@ class InputanKataObj {
 
     inputanOnKeypress() {
         this.inputan.addEventListener('keypress', (event) => {
-            document.querySelector('.debug').textContent = event.key + ", " + event.code
             if (
                 event.key === ' ' ||
                 event.key === 'Enter' ||
                 event.code === 'Space'
             ) {
                 event.preventDefault();
-                // if (this.inputan.value !== '') {
+                if (this.inputan.value !== '') {
                     this.kata[this.index].classList.remove('focus');
                     this.kata[this.index].classList.remove('peringatan');
                     if (this.inputan.value === this.textArray[this.index]) {
@@ -57,7 +56,7 @@ class InputanKataObj {
                     if (this.index >= this.textArray.length) {
                         this.disableInputan();
                     }
-                // }
+                }
             }
         });
     }
