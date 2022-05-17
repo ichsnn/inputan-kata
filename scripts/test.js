@@ -1,1 +1,1 @@
-console.log("unde deleniti excepturi fuga doloribus,".length)
+console.log("Loremipsumdolorsitametconsectetur,adipisicingelit.Doloresunde".length / 5)

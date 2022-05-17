@@ -51,7 +51,7 @@ class InputanKataObj {
                     } else {
                         this.kata[this.index].classList.add('salah');
                     }
-                    this.typedEntriesCh += this.textArray[this.index].length;
+                    this.typedEntriesCh += this.textArray[this.index].length + 1;
                     this.index++;
                     if (this.kata[this.index]) {
                         this.kata[this.index].classList.add('focus');
