@@ -9,8 +9,12 @@ class InputanKataObj {
     parentElement;
     durationHTML;
     durationOnSecond; // Example 60s
-    grossWPM = 0;
     diffScroll = 0;
+    grossWPM = 0;
+    netWPM = 0;
+    typedEntriesCh = 0;
+    uncorrectedError = 0;
+    timeStart = 0;
 
     constructor(parentElement, text, durationOnSecond = '60') {
         this.parentElement = parentElement;
@@ -47,6 +51,8 @@ class InputanKataObj {
                     } else {
                         this.kata[this.index].classList.add('salah');
                     }
+                    this.countGrossWPM();
+                    this.countNetWPM();
                     this.index++;
                     if (this.kata[this.index]) {
                         this.kata[this.index].classList.add('focus');
@@ -112,30 +118,49 @@ class InputanKataObj {
     disableInputan() {
         this.inputan.value = '';
         this.inputan.disabled = 1;
-        this.inputan.placeholder = "Klik untuk mulai ulang..."
-        this.parentElement.querySelector('.text-input').addEventListener('click', () => {
-            this.parentElement.remove();
-            addInputanKata();
-        })
+        this.inputan.placeholder = 'Klik untuk mulai ulang...';
+        this.parentElement
+            .querySelector('.text-input')
+            .addEventListener('click', () => {
+                this.parentElement.remove();
+                addInputanKata();
+            });
     }
 
     timerCountDown() {
         let timeout = 1000;
         this.durationOnSecond -= 1;
+        this.timeStart += 1;
         let countDown = setInterval(() => {
-            this.durationHTML.querySelector('#time-counter').textContent = secondToMinuteDuration(
-                this.durationOnSecond
-            );
+            this.durationHTML.querySelector('#time-counter').textContent =
+                secondToMinuteDuration(this.durationOnSecond);
             if (this.durationOnSecond === 0) {
                 clearTimeout(countDown);
                 this.disableInputan();
+                alert('Time Up!');
             }
-            if (this.durationOnSecond > 0) this.durationOnSecond--;
+            if (this.durationOnSecond > 0) {
+                this.durationOnSecond--;
+                this.timeStart++;
+            }
         }, timeout);
     }
 
-    countGrossWPM(word) {
-        console.log(word);
+    countGrossWPM() {
+        this.typedEntriesCh += this.textArray[this.index].length;
+        this.grossWPM = this.typedEntriesCh / 5 / (this.timeStart / 60);
+    }
+
+    countNetWPM() {
+        let salah = this.parentElement.querySelectorAll('.salah');
+        let errorCh = 0;
+        for (let i = 0; i < salah.length; i++) {
+            errorCh += salah[i].textContent.length;
+        }
+        this.uncorrectedError = errorCh / 5;
+        this.netWPM =
+            this.grossWPM - this.uncorrectedError / (this.timeStart / 60);
+            console.log(this.netWPM)
     }
 
     mulai() {
@@ -155,11 +180,13 @@ class InputanKata extends HTMLDivElement {
     constructor() {
         super();
         this.innerHTML = `
-            <div class="duration">Time Left :&nbsp;<div id="time-counter">1:00</div></div>
+        <div class="stats">
+            <div>WPM : <span id="wpm-counter">0</span></div>
+            <div class="duration">Time : <span id="time-counter">1:00</span></div>
+        </div>
             <div class="text-box">
                 <div id="text"></div>
             </div>
-
             <div class="text-input">
                 <input type="text" id="inputan" placeholder="Ketik di sini...">
                 <button type="reset" id="btn-reset"><span class="material-symbols-outlined">

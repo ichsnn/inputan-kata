@@ -81,13 +81,10 @@ body {
     position: relative;
     padding-left: 4px;
     padding-right: 4px;
-    margin-top: 4px;
 }
 
 .focus {
     background-color: yellow;
-    display: inline-block;
-    font-size: 24px;
     color: black;
     font-weight: 700;
 }
@@ -130,12 +127,16 @@ body {
     display: flex;
 }
 
-.inputan-kata-box .duration {
+.stats {
+    display: flex;
     padding: 4px;
     color: white;
-    display: flex;
-    justify-content: right;
+    justify-content: space-between;
     font-size: 14px;
+    font-weight: 600;
+}
+
+.stats .duration {
     font-weight: 600;
 }
 
