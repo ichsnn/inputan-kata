@@ -51,8 +51,7 @@ class InputanKataObj {
                     } else {
                         this.kata[this.index].classList.add('salah');
                     }
-                    this.countGrossWPM();
-                    this.countNetWPM();
+                    this.typedEntriesCh += this.textArray[this.index].length;
                     this.index++;
                     if (this.kata[this.index]) {
                         this.kata[this.index].classList.add('focus');
@@ -132,12 +131,14 @@ class InputanKataObj {
         this.durationOnSecond -= 1;
         this.timeStart += 1;
         let countDown = setInterval(() => {
+            this.countGrossWPM()
+            this.countNetWPM()
             this.durationHTML.querySelector('#time-counter').textContent =
                 secondToMinuteDuration(this.durationOnSecond);
+                this.parentElement.querySelector('#wpm-counter').textContent = this.netWPM.toFixed(0)
             if (this.durationOnSecond === 0) {
                 clearTimeout(countDown);
                 this.disableInputan();
-                alert('Time Up!');
             }
             if (this.durationOnSecond > 0) {
                 this.durationOnSecond--;
@@ -147,8 +148,7 @@ class InputanKataObj {
     }
 
     countGrossWPM() {
-        this.typedEntriesCh += this.textArray[this.index].length;
-        this.grossWPM = this.typedEntriesCh / 5 / (this.timeStart / 60);
+        this.grossWPM = (this.typedEntriesCh / 5) / (this.timeStart / 60);
     }
 
     countNetWPM() {
@@ -159,8 +159,7 @@ class InputanKataObj {
         }
         this.uncorrectedError = errorCh / 5;
         this.netWPM =
-            this.grossWPM - this.uncorrectedError / (this.timeStart / 60);
-            console.log(this.netWPM)
+        (this.grossWPM) - (this.uncorrectedError / (this.timeStart / 60));
     }
 
     mulai() {
