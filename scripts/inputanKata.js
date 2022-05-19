@@ -38,7 +38,7 @@ class InputanKataObj {
 
     inputanOnKeydown() {
         this.inputan.addEventListener('keydown', (event) => {
-            document.getElementById('debug').textContent = `${event.key}, ${event.code}`
+            document.getElementById('debug').textContent = `${event.key}, ${event.code}, ${event.which}`
         })
     }
 
