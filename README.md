@@ -2,4 +2,4 @@
 
 Bertujuan untuk menguji kecepatan mengetik pengguna.
 
-https://ichsnn.github.io/inputan-kata/
+<https://ichsnn.github.io/inputan-kata/>
