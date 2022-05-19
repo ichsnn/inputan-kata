@@ -33,13 +33,6 @@ class InputanKataObj {
         this.windowOnResize();
         this.resetButton = this.parentElement.querySelector('#btn-reset');
         this.resetOnClick();
-        this.inputanOnKeydown();
-    }
-
-    inputanOnKeydown() {
-        this.inputan.addEventListener('keydown', (event) => {
-            document.getElementById('debug').textContent = `${event.key}, ${event.code}, ${event.which},  ${String.fromCharCode(event.which)}, ${String.fromCharCode(event.code)}`
-        })
     }
 
     inputanOnKeypress() {
