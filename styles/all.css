@@ -8,6 +8,11 @@
 
 a {
     text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    color: white;
 }
 
 html {
@@ -15,18 +20,49 @@ html {
 }
 
 body {
-    padding: 20px;
     max-width: 720px;
     margin: auto;
 }
 
 #inputan-kata {
     position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+main {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 4ch;
+    justify-content: center;
+}
+
+footer a > div {
+    display: flex;
+    align-items: center;
+    gap: 1ch;
 }
 
 .title {
-    margin-bottom: 12px;
-    text-align: center;
+    font-size: 48px;
+    text-align: start;
     color: #ffd665;
     text-shadow: 4px 4px 0px #000;
     transition: all .25s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -34,6 +70,14 @@ body {
 
 .title:hover {
     text-shadow: 4px 4px 0px #000, 7px 7px 0px rgba(0, 0, 0, 0.2);
+}
+
+.lang {
+    color: #ffd665;
+    text-shadow: 2px 2px 0px #000;
+    display: flex;
+    gap: 1ch;
+    align-items: center;
 }
 
 .text-box {
@@ -131,7 +175,7 @@ body {
     display: flex;
     padding: 4px;
     color: white;
-    justify-content: space-between;
+    gap: 24px;
     font-size: 14px;
     font-weight: 600;
 }

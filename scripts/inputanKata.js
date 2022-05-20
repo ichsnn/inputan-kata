@@ -180,8 +180,10 @@ class InputanKata extends HTMLDivElement {
         super();
         this.innerHTML = `
         <div class="stats">
-            <div>WPM : <span id="wpm-counter">0</span></div>
             <div class="duration">Time : <span id="time-counter">1:00</span></div>
+            <div class="speed">Speed : 0 WPM</div>
+            <div class="wpm">WPM : <span id="wpm-counter">0 WPM</span></div>
+            <div class="accuracy">Accuracy : 0 %</div>
         </div>
             <div class="text-box">
                 <div id="text"></div>
