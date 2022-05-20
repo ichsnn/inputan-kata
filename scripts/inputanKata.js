@@ -15,6 +15,7 @@ class InputanKataObj {
     typedEntriesCh = 0;
     uncorrectedError = 0;
     timeStart = 0;
+    accuracy;
 
     constructor(parentElement, text, durationOnSecond = '60') {
         this.parentElement = parentElement;
@@ -51,7 +52,8 @@ class InputanKataObj {
                     } else {
                         this.kata[this.index].classList.add('salah');
                     }
-                    this.typedEntriesCh += this.textArray[this.index].length + 1;
+                    this.typedEntriesCh +=
+                        this.textArray[this.index].length + 1;
                     this.index++;
                     if (this.kata[this.index]) {
                         this.kata[this.index].classList.add('focus');
@@ -131,11 +133,14 @@ class InputanKataObj {
         this.durationOnSecond -= 1;
         this.timeStart += 1;
         let countDown = setInterval(() => {
-            this.countGrossWPM()
-            this.countNetWPM()
+            this.countGrossWPM();
+            this.countNetWPM();
+            this.countAccuracy();
             this.durationHTML.querySelector('#time-counter').textContent =
                 secondToMinuteDuration(this.durationOnSecond);
-                this.parentElement.querySelector('#wpm-counter').textContent = this.netWPM.toFixed(0)
+            this.parentElement.querySelector('#wpm-counter').textContent =
+                this.netWPM.toFixed(0);
+                this.parentElement.querySelector('#accuracy-counter').textContent = this.accuracy.toFixed(0);
             if (this.durationOnSecond === 0) {
                 clearTimeout(countDown);
                 this.disableInputan();
@@ -148,7 +153,7 @@ class InputanKataObj {
     }
 
     countGrossWPM() {
-        this.grossWPM = (this.typedEntriesCh / 5) / (this.timeStart / 60);
+        this.grossWPM = this.typedEntriesCh / 5 / (this.timeStart / 60);
     }
 
     countNetWPM() {
@@ -159,7 +164,17 @@ class InputanKataObj {
         }
         this.uncorrectedError = errorCh / 5;
         this.netWPM =
-        (this.grossWPM) - (this.uncorrectedError / (this.timeStart / 60));
+            this.grossWPM - this.uncorrectedError / (this.timeStart / 60);
+    }
+
+    countAccuracy() {
+        let benar = this.parentElement.querySelectorAll('.benar').length;
+        let jumlahKata = this.index;
+        if(jumlahKata !== 0) {
+            this.accuracy = (benar / jumlahKata) * 100;
+        } else {
+            this.accuracy = 0;
+        }
     }
 
     mulai() {
@@ -181,9 +196,8 @@ class InputanKata extends HTMLDivElement {
         this.innerHTML = `
         <div class="stats">
             <div class="duration">Time : <span id="time-counter">1:00</span></div>
-            <div class="speed">Speed : 0 WPM</div>
-            <div class="wpm">WPM : <span id="wpm-counter">0 WPM</span></div>
-            <div class="accuracy">Accuracy : 0 %</div>
+            <div class="wpm">Speed : <span id="wpm-counter">0</span> WPM</div>
+            <div class="accuracy">Accuracy : <span id="accuracy-counter">0</span> %</div>
         </div>
             <div class="text-box">
                 <div id="text"></div>
