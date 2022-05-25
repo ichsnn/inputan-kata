@@ -1,5 +1,1 @@
-# Inputan Kata
-
-Bertujuan untuk menguji kecepatan mengetik pengguna.
-
-<https://ichsnn.github.io/inputan-kata/>
+This is a starter template for [Learn Next.js](https://nextjs.org/learn).
